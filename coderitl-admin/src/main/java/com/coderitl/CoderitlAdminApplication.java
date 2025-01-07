@@ -1,4 +1,4 @@
-package com.coderitl.coderitl.admin;
+package com.coderitl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

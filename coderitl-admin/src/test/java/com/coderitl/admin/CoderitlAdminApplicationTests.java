@@ -1,4 +1,4 @@
-package com.coderitl.coderitl.admin;
+package com.coderitl.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

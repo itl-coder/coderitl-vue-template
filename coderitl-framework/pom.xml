@@ -15,5 +15,10 @@
     <name>coderitl-framework</name>
     <description>coderitl-framework</description>
 
-
+<dependencies>
+    <dependency>
+        <groupId>com.coderitl</groupId>
+        <artifactId>coderitl-common</artifactId>
+    </dependency>
+</dependencies>
 </project>
