@@ -9,9 +9,11 @@
     </parent>
 
     <groupId>com.coderitl</groupId>
-    <artifactId>coderitl-common</artifactId>
+    <artifactId>coderitl-framework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>coderitl-common</name>
-    <description>coderitl-common</description>
+    <name>coderitl-framework</name>
+    <description>coderitl-framework</description>
+
+
 </project>

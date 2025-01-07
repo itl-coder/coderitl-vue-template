@@ -19,26 +19,113 @@
     <description>coderitl-template</description>
 
     <modules>
-        <!-- 公共依赖 -->
+        <!-- 工具类 -->
         <module>coderitl-common</module>
         <!-- Flowable 工作流 -->
         <module>coderitl-flowable</module>
+        <!-- 框架核心 -->
+        <module>coderitl-framework</module>
+        <!-- 后台服务 -->
+        <module>coderitl-admin</module>
     </modules>
 
     <properties>
         <java.version>17</java.version>
+        <coderitl.version>0.0.1-SNAPSHOT</coderitl.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- 数据库连接池 -->
+        <druid.version>1.2.23</druid.version>
+        <jwt.version>0.9.1</jwt.version>
+        <!-- Excel 操作 -->
+        <fastexcel.version>1.0.0</fastexcel.version>
+        <fastjson.version>2.0.43</fastjson.version>
+        <!--  spring security-->
+        <spring-security.version>5.7.12</spring-security.version>
+        <!-- 工作流 -->
+        <flowable.version>6.8.0</flowable.version>
+        <!-- API文档 -->
+        <knife4j.version>4.4.0</knife4j.version>
+        <!-- 分页插件 -->
+        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
+        <!-- MybatisPlus 数据库操作 -->
+        <mybatis.plus.version>3.4.0</mybatis.plus.version>
+        <commons.lang.version>3.17.0</commons.lang.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!--常用工具类 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+            <!-- 官网: https://doc.xiaominfo.com/ -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- 官网: https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--  官网: https://idev.cn/fastexcel/zh-CN/docs/intro/quick_start -->
+            <dependency>
+                <groupId>cn.idev.excel</groupId>
+                <artifactId>fastexcel</artifactId>
+                <version>${fastexcel.version}</version>
+            </dependency>
+            <!-- 阿里JSON解析器 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-spring-boot-starter</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

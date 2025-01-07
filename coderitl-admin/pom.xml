@@ -9,9 +9,19 @@
     </parent>
 
     <groupId>com.coderitl</groupId>
-    <artifactId>coderitl-common</artifactId>
+    <artifactId>coderitl-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>coderitl-common</name>
-    <description>coderitl-common</description>
+    <name>coderitl-admin</name>
+    <description>coderitl-admin</description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
