@@ -23,7 +23,7 @@ public class SysLoginController {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginBody.getUsername(),loginBody.getPassword());
         // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
+        //  AuthenticationContextHolder.setContext(authenticationToken);
         return ajax;
     }
 }
