@@ -2,6 +2,8 @@ package com.coderitl.framework.config;
 
 import com.coderitl.framework.filter.JwtAuthenticationTokenFilter;
 import com.coderitl.framework.security.handle.AuthenticationEntryPointImpl;
+import com.coderitl.framework.security.handle.AuthenticationFailureImpl;
+import com.coderitl.framework.security.handle.AuthenticationSuccessImpl;
 import com.coderitl.framework.security.handle.LogoutSuccessHandlerImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,13 @@ public class SecurityConfig {
     @Autowired
     private CorsFilter corsFilter;
 
+    /**
+     * 登录成功后的处理
+     */
+    @Autowired
+    private AuthenticationSuccessImpl authenticationSuccess;
+    @Autowired
+    private AuthenticationFailureImpl authenticationFailure;
 
     /**
      * 身份验证实现
@@ -102,8 +111,8 @@ public class SecurityConfig {
                 .formLogin(
                         // 登录接口可以匿名访问
                         (formLogin) -> formLogin.loginProcessingUrl("/login").permitAll()
-                        // .successHandler()  // 登录成功处理
-                        // .failureHandler() 登录失败处理
+                                .successHandler(authenticationSuccess) // 登录成功处理
+                                .failureHandler(authenticationFailure) // 登录失败处理
                 )
                 // 认证失败处理类
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
