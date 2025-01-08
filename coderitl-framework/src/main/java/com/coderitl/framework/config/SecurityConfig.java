@@ -108,12 +108,12 @@ public class SecurityConfig {
                     headersCustomizer.cacheControl(cache -> cache.disable()).frameOptions(options -> options.sameOrigin());
                 })
                 // TODO
-                .formLogin(
-                        // 登录接口可以匿名访问
-                        (formLogin) -> formLogin.loginProcessingUrl("/login").permitAll()
-                                .successHandler(authenticationSuccess) // 登录成功处理
-                                .failureHandler(authenticationFailure) // 登录失败处理
-                )
+//                .formLogin(
+//                        // 登录接口可以匿名访问
+//                        (formLogin) -> formLogin.loginProcessingUrl("/login").permitAll()
+//                                .successHandler(authenticationSuccess) // 登录成功处理
+//                                .failureHandler(authenticationFailure) // 登录失败处理
+//                )
                 // 认证失败处理类
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 // 基于token，所以不需要session
