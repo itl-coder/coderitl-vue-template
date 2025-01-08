@@ -31,3 +31,16 @@ flowable:
   database-schema-update: true
   # ??????JOB
   async-executor-activate: false
+
+# ?????
+# druid ?????
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/coderitl?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useServerPrepStmts=true
+      username: root
+      password: root
+      initial-size: 1
+      min-idle: 1
+      max-active: 20

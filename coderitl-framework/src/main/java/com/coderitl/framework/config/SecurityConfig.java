@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
@@ -20,16 +21,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.time.Duration;
-import java.util.Arrays;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 /**
- * spring security 配置
+ * spring security配置
  */
 @Slf4j
 @Configuration
@@ -42,7 +38,7 @@ public class SecurityConfig {
     private UserDetailsService userDetailsService;
 
     /**
-     * 认证失败逻辑
+     * 认证失败处理类
      */
     @Autowired
     private AuthenticationEntryPointImpl unauthorizedHandler;
@@ -54,10 +50,18 @@ public class SecurityConfig {
     private LogoutSuccessHandlerImpl logoutSuccessHandler;
 
     /**
-     * token 认证过滤器
+     * token认证过滤器
      */
     @Autowired
     private JwtAuthenticationTokenFilter authenticationTokenFilter;
+
+    /**
+     * 跨域过滤器
+     */
+    @Lazy
+    @Autowired
+    private CorsFilter corsFilter;
+
 
     /**
      * 身份验证实现
@@ -94,6 +98,13 @@ public class SecurityConfig {
                 .headers((headersCustomizer) -> {
                     headersCustomizer.cacheControl(cache -> cache.disable()).frameOptions(options -> options.sameOrigin());
                 })
+                // TODO
+                .formLogin(
+                        // 登录接口可以匿名访问
+                        (formLogin) -> formLogin.loginProcessingUrl("/login").permitAll()
+                        // .successHandler()  // 登录成功处理
+                        // .failureHandler() 登录失败处理
+                )
                 // 认证失败处理类
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 // 基于token，所以不需要session
@@ -114,8 +125,8 @@ public class SecurityConfig {
                 // 添加JWT filter
                 .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 // 添加CORS filter
-                .addFilterBefore(corsFilter(), JwtAuthenticationTokenFilter.class)
-                .addFilterBefore(corsFilter(), LogoutFilter.class)
+                .addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class)
+                .addFilterBefore(corsFilter, LogoutFilter.class)
                 .build();
     }
 
@@ -127,13 +138,16 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * 跨域配置
+     */
     @Bean
-    public CorsFilter corsFilter()
-    {
+    public CorsFilter corsFilter() {
+        log.info("into Security corsFilter...........................................: {}", bCryptPasswordEncoder().encode("1234"));
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         // 设置访问源地址
-        config.addAllowedOrigin("*");
+        config.addAllowedOriginPattern("*");
         // 设置访问源请求头
         config.addAllowedHeader("*");
         // 设置访问源请求方法

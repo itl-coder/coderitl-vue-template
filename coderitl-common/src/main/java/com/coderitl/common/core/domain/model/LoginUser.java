@@ -3,6 +3,7 @@ package com.coderitl.common.core.domain.model;
 import com.coderitl.common.core.domain.entity.SysUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class LoginUser implements UserDetails {
     /**
@@ -56,9 +58,6 @@ public class LoginUser implements UserDetails {
      * 用户信息
      */
     private SysUser user;
-
-    public LoginUser() {
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

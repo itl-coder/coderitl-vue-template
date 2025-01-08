@@ -25,13 +25,15 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info("into UserNamePasswordFilter.....................");
+        log.info("Into JwtAuthenticationTokenFilter doFilterInternal.....................:");
 
         LoginUser loginUser = new LoginUser();
         loginUser.setUser(new SysUser("user","1234"));
+
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
         filterChain.doFilter(request, response);
     }
 }

@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 public class SysUser {
     public SysUser(String userName,String password) {
         this.userName = userName;

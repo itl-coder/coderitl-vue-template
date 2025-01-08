@@ -20,10 +20,6 @@
             <groupId>com.coderitl</groupId>
             <artifactId>coderitl-framework</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.coderitl</groupId>
-            <artifactId>coderitl-common</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
